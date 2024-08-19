@@ -53,9 +53,29 @@ const GetSitemap = () :Promise<ApiSuccessResponse<{url: SitemapUrl[]}>> => {
 };
 
 
+const SubscribeComingSoon = (email:string) :Promise<ApiSuccessResponse<void>> => {
+  return fetch(host+`/form/comingsoon`, {
+    method: "POST",
+    headers: {
+      "Authorization": process.env.NEXT_PUBLIC_BLOGSTRAPS_API_KEY ?? "",
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }, 
+    body: JSON.stringify({email: email})
+  }).
+  then((r) => {
+    if(r.status >= 400){
+      throw r
+    }
+    return r.json()
+  })
+};
+
+
 export const BlogstrapsApi = {
   GetEmbedPosts,
   GetEmbedPost,
   GetSitemap,
+  SubscribeComingSoon,
 };
 

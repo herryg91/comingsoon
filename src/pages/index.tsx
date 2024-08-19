@@ -5,10 +5,11 @@ import Head from "next/head";
 import { EmbedPosts } from "@/repositories/blogstraps-api/entity";
 import { BlogstrapsApi } from "@/repositories/blogstraps-api";
 import { useFetch } from "@/pkg/hook/useFetch";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import  Logo  from "@/assets/images/logo/logo.svg";
 import Image from "next/image";
+import SubscribeInput from "@/components/subscribe-input";
 
 const font_bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
@@ -17,12 +18,14 @@ const font_bricolage = Bricolage_Grotesque({
 })
 
 const HomePage: NextPage = () => {
+  const [email, setEmail] = useState("")
   const getPosts = useFetch<EmbedPosts>(BlogstrapsApi.GetEmbedPosts)
   useEffect(() => {
     if(process.env.NEXT_PUBLIC_BLOGSTRAPS_API_KEY !== ""){
         getPosts.request("", "", 1)
       }
   },[])
+  
   return <>
   <Head>
     <title>Coming Soon</title>
@@ -37,11 +40,8 @@ const HomePage: NextPage = () => {
       <Badge className="my-4 bg-accent text-gray-700">ComingPage is coming soon</Badge>
       <h1 className={"max-w-xl text-5xl mx-auto font-bold " + font_bricolage.className}>Create Coming Soon Landing Page in Minute</h1>
     </section>
-    <section id="waitlist-form" className="my-8">
-      <Join className="mb-2">
-        <Input type="email" inputMode="email" className="join-item" placeholder="Email Address" required />
-        <Button type="button" className="join-item" color="accent" onClick={() => {}}>Notify Me</Button>
-      </Join>
+    <section id="subscribe-form" className="my-8">
+      <SubscribeInput />
       <p className="text-sm text-gray-500">Join <b>2.000+</b> members who already sign up</p>
     </section>
     <section className="mb-8">

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { EmbedPost } from "@/repositories/blogstraps-api/entity";
 import { BlogstrapsApi } from "@/repositories/blogstraps-api";
 import { Breadcrumbs, Button, Input, Join } from "react-daisyui";
+import SubscribeInput from "@/components/subscribe-input";
 
 const PostPage: NextPage<{ post: EmbedPost }> = (param) => {
   const [current_url, set_current_url ] = useState("")
@@ -46,11 +47,8 @@ const PostPage: NextPage<{ post: EmbedPost }> = (param) => {
       <div className="w-full max-w-3xl mx-auto py-12 text-center px-4 flex">
         <div className="m-auto">
           <section id="waitlist-form" className="my-8">
-            <Join className="mb-2">
-              <Input type="email" inputMode="email" className="join-item" placeholder="Email Address" required />
-              <Button type="button" className="join-item" color="accent" onClick={() => {}}>Notify Me</Button>
-            </Join>
-            <p className="text-sm text-gray-500">Join <b>2.000+</b> members who already sign up</p>
+            <SubscribeInput />
+            
           </section>
         </div>
       </div>
